@@ -33,7 +33,7 @@ graf_mun_pop <- base_prep |> ggplot(mapping = aes(x = municipio, fill = populaca
 #Avaliação da Associação entre as variáveis municipio e descontinuou
 cont_mun_desc <- base_prep |> cross_cases(municipio, descontinuou);
 xq_mun_desc <- chisq.test(table(base_prep$municipio, base_prep$descontinuou))$statistic |> unname();
-v_mun_desc <- sqrt(xq_mun_desc/200*(min(nrow(cont_mun_desc)-1,ncol(cont_mun_desc)-1)-1));
+v_mun_desc <- sqrt(xq_mun_desc/198*(min(nrow(cont_mun_desc)-1,ncol(cont_mun_desc)-1)-1));
 graf_mun_desc <- base_prep |> ggplot(mapping = aes(x = municipio, fill = descontinuou)) +
   geom_bar(position = 'fill') +
   labs(x = "municípios", y = '%', fill = 'descontinuou em algum momento?') +
