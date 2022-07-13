@@ -40,6 +40,46 @@ graf_mun_desc <- base_prep |> ggplot(mapping = aes(x = municipio, fill = descont
   scale_y_continuous(labels = scales::percent_format()) +
   scale_fill_discrete(labels = c('Não', 'Sim', 'Não quis responder'))
 
+#Avaliação da Associação entre as variáveis municipio e idade
+res_mun_age <- base_prep |>group_by(municipio) |> #agrupando os dados com base no município
+  summarise(media = mean(idade, na.rm = T), #calculando a média para cada grupo
+            var = var(idade, na.rm = T), #calculando a variância para cada grupo
+            n = n()) #calculando a frequência para cada grupo
+var_med_mun_age <- sum(res_mun_age$var*res_mun_age$n)/sum(res_mun_age$n) #calculando a variância média
+r2_mun_age <- 1 - var_med_mun_age/var(base_prep$idade, na.rm = T)
+boxplot_mun_age <- base_prep |> ggplot(mapping = aes(x = municipio, y = idade)) +
+  geom_boxplot()
+
+#Avaliação da Associação entre as variáveis municipio e escolaridade
+res_mun_esco <- base_prep |>group_by(municipio) |>
+  summarise(media = mean(escolaridade, na.rm = T),
+            var = var(escolaridade, na.rm = T),
+            n = n())
+var_med_mun_esco <- sum(res_mun_esco$var*res_mun_esco$n)/sum(res_mun_esco$n)
+r2_mun_esco <- 1 - var_med_mun_esco/var(base_prep$escolaridade, na.rm = T)
+boxplot_mun_esco <- base_prep |> ggplot(mapping = aes(x = municipio, y = escolaridade)) +
+  geom_boxplot()
+
+#Avaliação da Associação entre as variáveis municipio e depressao
+res_mun_dep <- base_prep |>group_by(municipio) |>
+  summarise(media = mean(depressao, na.rm = T),
+            var = var(depressao, na.rm = T),
+            n = n())
+var_med_mun_dep <- sum(res_mun_dep$var*res_mun_dep$n)/sum(res_mun_dep$n)
+r2_mun_dep <- 1 - var_med_mun_dep/var(base_prep$depressao, na.rm = T)
+boxplot_mun_dep <- base_prep |> ggplot(mapping = aes(x = municipio, y = depressao)) +
+  geom_boxplot()
+
+#Avaliação da Associação entre as variáveis municipio e ansiedade
+res_mun_ans <- base_prep |>group_by(municipio) |>
+  summarise(media = mean(ansiedade, na.rm = T),
+            var = var(ansiedade, na.rm = T),
+            n = n())
+var_med_mun_ans <- sum(res_mun_ans$var*res_mun_ans$n)/sum(res_mun_ans$n)
+r2_mun_ans <- 1 - var_med_mun_ans/var(base_prep$ansiedade, na.rm = T)
+boxplot_mun_ans <- base_prep |> ggplot(mapping = aes(x = municipio, y = ansiedade)) +
+  geom_boxplot()
+
 #Essas linhas são pra evitar incompatibilidade entre os pacotes readr e expss, NÃO APAGAR
 detach("package:expss", unload = T);
 detach("package:maditr", unload = T)
