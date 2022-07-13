@@ -1,16 +1,15 @@
-library(readr);
-base_prep <- read_delim(
-  file = 'base_PREp.txt',
-  locale = locale(decimal_mark = ','),
-  na = c('77777','88888'),
-  col_types = cols(cd_pac = col_character())
+library(readr); #Ativando o pacote para importar arquivos do tipo txt
+base_prep <- read_delim( #importando a base de dados através da função 'read_delim()' e armazenando na variável 'base_prep'
+  file = './base_PREp.txt', #Definindo o caminho do arquivo da base de dados
+  locale = locale(decimal_mark = ','), #configurando para que a vírgula seja considerada como separador decimal
+  na = c('77777','88888'), #configurando os valores que representam dados faltantes(NA)
+  col_types = cols(cd_pac = col_character()) #definindo os valores da coluna cd_pac como texto
 );
-library(dplyr);
-base_prep <- base_prep |> mutate(
-  municipio = factor(
-    municipio,
-    levels = c(1,2,3),
-    labels = c('Salvador', 'Sao Paulo', 'Belo Horizonte'),
+library(dplyr); #Ativando o pacote para manipulação de bases de dados
+base_prep <- base_prep |> mutate( #Alterando a base de dados
+  municipio = factor(municipio, #alterando a váriavel município para que corresponda devidamente a uma variável qualitativa
+    levels = c(1,2,3), #delimitando os códigos usados para cada realização
+    labels = c('Salvador', 'Sao Paulo', 'Belo Horizonte'), #dando os devidos nomes às realizações
   ),
   descontinuou = factor(
     descontinuou,
@@ -41,7 +40,7 @@ base_prep <- base_prep |> mutate(
     uso_camisinha,
     levels = c(1,2,3),
     labels = c('Raramente','Ocasionalmente', 'Sempre'),
-    ordered = T
+    ordered = T #definindo a variável como qualitativa ordinal
   ),
   pessoas_velhas = factor(
     pessoas_velhas,
