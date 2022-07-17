@@ -1,7 +1,7 @@
-source('./import.R')
-source('./rel_municipio_variables.R')
-source('./rel_idade_escalas.R')
-source('./rel_discriminacao_violencia_in_mora.R')
+source('./import.R') #importação
+source('./rel_municipio_variables.R') #tópico 2
+source('./rel_idade_escalas.R') #tópico 3
+source('./rel_discriminacao_violencia_in_mora.R') #tópico 5
 
 #Essas linhas são pra evitar incompatibilidade entre os pacotes readr e expss, NÃO APAGAR
 detach("package:expss", unload = T)
